@@ -1,4 +1,3 @@
-# Spring之底层架构核心概念解析
 
 ## BeanDefinition
 
@@ -141,10 +140,11 @@ beanFactory.registerBeanDefinition("user", beanDefinition);
 System.out.println(beanFactory.getBean("user"));
 ```
 
+
 **DefaultListableBeanFactory是非常强大的，支持很多功能，可以通过查看DefaultListableBeanFactory的类继承实现结构来看**
 
 
-![](C:\Users\Administrator\Downloads\image (1).png)
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/365147/1602053031607-fd00a145-67fa-4231-8cca-9186db5f2b00.png#height=272&id=ln8oK&margin=%5Bobject%20Object%5D&name=image.png&originHeight=544&originWidth=1279&originalType=binary&ratio=1&size=55904&status=done&style=none&width=639.5)
 
 
 **这部分现在看不懂没关系，源码熟悉一点后回来再来看都可以。**
@@ -201,7 +201,8 @@ System.out.println(beanFactory.getBean("user"));
 
 
 ### AnnotationConfigApplicationContext
-![](C:\Users\Administrator\Downloads\image (2).png)
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/365147/1602055860352-0925b046-b88e-4085-b872-b1ec5aeb8fee.png#height=255&id=biJ36&margin=%5Bobject%20Object%5D&name=image.png&originHeight=510&originWidth=1639&originalType=binary&ratio=1&size=54256&status=done&style=none&width=819.5)
+
 
 **这部分现在看不懂没关系，源码熟悉一点后回来再来看都可以。**
 
@@ -214,7 +215,7 @@ System.out.println(beanFactory.getBean("user"));
 
 
 ### ClassPathXmlApplicationContext
-![image.png](C:\Users\Administrator\Downloads\image (3).png)
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/365147/1602056629659-0bb9b513-834c-4e57-9120-55dc40fd8674.png#height=237&id=TDJ6q&margin=%5Bobject%20Object%5D&name=image.png&originHeight=474&originWidth=1497&originalType=binary&ratio=1&size=44996&status=done&style=none&width=748.5)
 它也是继承了AbstractApplicationContext，但是相对于AnnotationConfigApplicationContext而言，功能没有AnnotationConfigApplicationContext强大，比如不能注册BeanDefinition
 
 
