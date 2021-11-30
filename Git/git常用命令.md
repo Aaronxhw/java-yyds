@@ -20,7 +20,7 @@ git config --global --unset https.proxy
 
 
 
-![git command](../image/git command.png)
+![git command](../image/4.png)
 
 
 
