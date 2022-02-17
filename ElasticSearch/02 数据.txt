@@ -1,0 +1,172 @@
+GET _mget
+{
+  "docs": [
+    {
+      "_index": "es_db",
+      "_type": "_doc",
+      "_id": 1
+    },
+    {
+       "_index": "es_db",
+       "_type": "_doc",
+       "_id": 2
+    }
+    ]
+}
+
+GET /es_db/_mget
+{
+  "docs":[
+    {
+       "_type":"_doc",
+       "_id": 3
+    },
+      {
+       "_type":"_doc",
+       "_id": 4
+    }
+    ]
+}
+
+GET /es_db/_doc/_mget
+{
+  "docs":[
+    {
+      "_id":1
+    },{
+      "_id":2
+    }
+    ]
+}
+
+POST _bulk
+{"create":{"_index":"article", "_type":"_doc", "_id":3}}
+{"id":3,"title":"白起老师1","content":"白起老师666","tags":["java", "面向对象"],"create_time":1554015482530}
+{"create":{"_index":"article", "_type":"_doc", "_id":4}}
+{"id":4,"title":"白起老师2","content":"白起老师NB","tags":["java", "面向对 象"],"create_time":1554015482530}
+
+
+GET /article/_mget
+{
+  "docs":[
+    {
+       "_type":"_doc",
+       "_id": 3
+    },
+      {
+       "_type":"_doc",
+       "_id": 4
+    }
+    ]
+}
+
+POST _bulk
+ {"index":{"_index":"article", "_type":"_doc", "_id":3}}
+{"id":3,"title":"图灵徐庶老师(一)","content":"图灵学院徐庶老师666","tags":["java", "面向对象"],"create_time":1554015482530}
+ {"index":{"_index":"article", "_type":"_doc", "_id":4}}
+{"id":4,"title":"图灵诸葛老师(二)","content":"图灵学院诸葛老师NB","tags":["java", "面向对象"],"create_time":1554015482530}
+
+
+POST _bulk
+{"update":{"_index":"article", "_type":"_doc", "_id":3}}
+{"doc":{"title":"ES大法必修内功"}}
+{"update":{"_index":"article", "_type":"_doc", "_id":4}}
+{"doc":{"create_time":1554018421008}}
+
+
+#全量搜索
+GET /es_db/_doc/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+#query方式查询,精确匹配   select * from student where name = 'admin'
+POST /es_db/_doc/_search
+{
+  "query":{
+    "term":{
+      "sex":0
+    }
+  }
+}
+
+#模糊查询
+POST /es_db/_doc/_search
+{
+  "query":{
+    "match":{
+      "address":"广州"
+    }
+  }
+}
+
+#多字段查询
+POST /es_db/_doc/_search
+{
+  "query":{
+    "multi_match":{
+      "query":"张三",
+      "fields":["address","name"]
+    }
+  }
+}
+
+#无具体字段查询
+POST /es_db/_doc/_search
+{
+  "query":{
+    "query_string":{
+      "query":"(广州) OR 东北"
+    }
+  }
+}
+
+#指定字段条件查询 query_string , 含 AND 与 OR 条件
+POST /es_db/_doc/_search
+{
+  "query":{
+    "query_string":{
+      "query":"admin or 长沙",
+      "fields":["name","address"]
+    }
+  }
+}
+
+#DSL范围查询,及分页，指定字段，排序综合查询
+POST /es_db/_doc/_search
+{
+  "query":{
+    "range":{
+      "age":{
+        "gte":25,
+        "lte":28
+      }
+    }
+  },
+  "from":0,
+  "size":3,
+  "_source":["name","age"],
+  "sort":{"age":"desc"}
+}
+
+#filter查询，，不会算分，也不会对结果进行排序，因此效率高一点，查询的结果可以被缓存
+POST /es_db/_doc/_search
+{
+  "query":{
+    "bool":{
+      "filter":{
+        "term":{
+          "age":25
+        }
+      }
+    }
+  }
+}
+
+#查看表数据字段类型
+GET /es_db/_mapping
+
+
+

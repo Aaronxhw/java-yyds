@@ -1,0 +1,52 @@
+ PUT /es_db
+ 
+ 
+ 
+PUT /es_db/_doc/1
+{
+   "name": "张三",
+   "sex": 1,
+   "age": 25,
+   "address": "广州天河公园",
+   "remark": "java developer"
+}
+
+PUT /es_db/_doc/2
+{
+   "name": "李四",
+   "sex": 1,
+   "age": 28,
+   "address": "广州荔湾大厦",
+   "remark": "java assistant"
+}
+
+PUT /es_db/_doc/3
+{
+   "name": "rod",
+   "sex": 0,
+   "age": 26,
+   "address": "广州白云山公园",
+   "remark": "php developer"
+}
+
+PUT /es_db/_doc/4
+{
+   "name": "admin",
+   "sex": 0,
+   "age": 22,
+   "address": "长沙橘子洲头",
+   "remark": "python assistant"
+}
+
+PUT /es_db/_doc/5
+{
+   "name": "小明",
+   "sex": 0,
+   "age": 19,
+   "address": "长沙岳麓山",
+   "remark": "java architect assistant"
+}
+
+GET /es_db/_doc/_search?q=age[25 TO 26]&from=0&size=2
+
+GET /es_db/_doc/_search?_source=name,age
